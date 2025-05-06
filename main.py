@@ -27,7 +27,7 @@ def generate(
 def main():
     st.title("QR Code Generator")
     file_name = st.text_input("File name")
-    file_type = st.selectbox("Choose file type", ("png", "svg", "jpeg"))
+    file_type = st.selectbox("Choose file type", ("jpeg", "png", "svg"))
     content = st.text_area("Content")
     col1, col2, col3 = st.columns(3)
     with col1:
