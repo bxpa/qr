@@ -1,5 +1,4 @@
 import io
-from sys import getsizeof
 
 import qrcode
 import streamlit as st
@@ -65,14 +64,6 @@ def main():
                 mime = "image/jpeg"
             case "png":
                 mime = "image/png"
-
-
-        if not file_name or not content:
-            st.warning("Please enter a necessary fields")
-
-        if getsizeof(content) > 2953:
-            print(getsizeof(content))
-            st.warning("Content is too large, please reduce the size")
 
     is_disabled = not (file_name and content)
 
