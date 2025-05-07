@@ -74,12 +74,16 @@ def main():
             print(getsizeof(content))
             st.warning("Content is too large, please reduce the size")
 
-        st.download_button(
-                label="Download",
-                data=img_byte_arr,
-                file_name=f"{file_name}.{file_type}",
-                mime=f"{mime}",
-            )
+    is_disabled = not (file_name and content)
+
+    st.download_button(
+        label="Download",
+        data=img_byte_arr if not is_disabled else b"",  # Provide empty data if disabled
+        file_name=f"{file_name}.{file_type}" if not is_disabled else "",
+        mime=f"{mime}" if not is_disabled else "",
+        disabled=is_disabled,  # Disable the button if fields are not filled
+        use_container_width=True,
+    )
 
 
 if __name__ == "__main__":
