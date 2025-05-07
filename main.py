@@ -7,7 +7,7 @@ import streamlit as st
 
 def generate(
     content: str,
-    # error_correction=qrcode.ERROR_CORRECT_L,
+    error_correction=qrcode.ERROR_CORRECT_L,
     version: float = 1,
     size: float = 10,
     border: float = 4,
@@ -16,7 +16,7 @@ def generate(
 ):
     qr = qrcode.QRCode(
         version=version,
-        # error_correction=error_correction,
+        error_correction=error_correction,
         box_size=size,
         border=border,
     )
@@ -43,8 +43,8 @@ def main():
         )
     with col3:
         border = st.number_input("Enter border", min_value=0, max_value=10, value=4, help="The border parameter controls how many boxes thick the border should be (minimum 4).")
-    fill = st.text_input("Fill Colour", value="#000000")
-    back_color = st.text_input("Background Colour", value="#ffffff", help="You can use hex colour codes or colour names: transparent, red, green, blue, etc.")
+    fill = st.text_input("Fill colour", value="#000000", help="Must be defined using hex colour code")
+    back_color = st.text_input("Background colour", value="#ffffff", help="You can use hex colour codes or colour names: transparent, red, green, blue, etc.")
     if content:
         qr_code_img = generate(
             content,
@@ -66,6 +66,7 @@ def main():
             case "png":
                 mime = "image/png"
 
+
         if not file_name or not content:
             st.warning("Please enter a necessary fields")
 
@@ -74,11 +75,11 @@ def main():
             st.warning("Content is too large, please reduce the size")
 
         st.download_button(
-            label="Download",
-            data=img_byte_arr,
-            file_name=f"{file_name}.{file_type}",
-            mime=f"{mime}",
-        )
+                label="Download",
+                data=img_byte_arr,
+                file_name=f"{file_name}.{file_type}",
+                mime=f"{mime}",
+            )
 
 
 if __name__ == "__main__":
